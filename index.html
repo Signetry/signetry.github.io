@@ -172,6 +172,16 @@
   .reg-row .rn{font-family:var(--mono);font-size:15px;color:var(--wax-deep)}
   .reg-row .rd{color:var(--ink-soft);font-size:15px}
   .reg-row .rt{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:right;letter-spacing:.04em}
+
+  /* contributors — sealed panels */
+  .contrib{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:38px}
+  @media(max-width:640px){.contrib{grid-template-columns:1fr}}
+  .cbox{border:1px solid var(--rule-strong);border-radius:3px;background:var(--panel);
+    padding:16px 18px 18px;text-decoration:none;color:inherit;transition:.14s;display:block}
+  .cbox:hover{border-color:var(--wax-deep);transform:translateY(-2px)}
+  .cbox .cn{font-family:var(--mono);font-size:13px;color:var(--wax-deep);display:block;margin-bottom:12px;
+    letter-spacing:.04em}
+  .cbox img{max-width:100%;height:auto;display:block}
   @media(max-width:640px){.reg-row{grid-template-columns:1fr;gap:4px}.reg-row .rt{text-align:left}}
 
   footer{border-top:1px solid var(--rule);padding:44px 0 60px;margin-top:30px}
@@ -330,6 +340,21 @@
         <a class="reg-row" href="https://github.com/Signetry/plugins"><span class="rn">plugins</span><span class="rd">Editor & agent integrations — Claude Code, Codex, Cursor, pre-commit.</span><span class="rt">—</span></a>
         <a class="reg-row" href="https://github.com/Signetry/signetry"><span class="rn">signetry</span><span class="rd">The overview — architecture, integrations, compatibility.</span><span class="rt">docs</span></a>
       </div>
+    </section>
+
+    <section id="contributors">
+      <span class="sec-no mono">§ V</span>
+      <h2>The contributors</h2>
+      <p class="sec-lead">Credited for contributions accepted under the CLA — credit, not ownership. Each seal links to that repo's contributor graph and updates on its own.</p>
+      <div class="contrib">
+        <a class="cbox" href="https://github.com/Signetry/core/graphs/contributors"><span class="cn">core</span><img loading="lazy" src="https://contrib.rocks/image?repo=Signetry/core&anon=0" alt="core contributors"/></a>
+        <a class="cbox" href="https://github.com/Signetry/action/graphs/contributors"><span class="cn">action</span><img loading="lazy" src="https://contrib.rocks/image?repo=Signetry/action&anon=0" alt="action contributors"/></a>
+        <a class="cbox" href="https://github.com/Signetry/reviewer/graphs/contributors"><span class="cn">reviewer</span><img loading="lazy" src="https://contrib.rocks/image?repo=Signetry/reviewer&anon=0" alt="reviewer contributors"/></a>
+        <a class="cbox" href="https://github.com/Signetry/eval/graphs/contributors"><span class="cn">eval</span><img loading="lazy" src="https://contrib.rocks/image?repo=Signetry/eval&anon=0" alt="eval contributors"/></a>
+        <a class="cbox" href="https://github.com/Signetry/plugins/graphs/contributors"><span class="cn">plugins</span><img loading="lazy" src="https://contrib.rocks/image?repo=Signetry/plugins&anon=0" alt="plugins contributors"/></a>
+        <a class="cbox" href="https://github.com/Signetry/signetry/graphs/contributors"><span class="cn">signetry</span><img loading="lazy" src="https://contrib.rocks/image?repo=Signetry/signetry&anon=0" alt="signetry contributors"/></a>
+      </div>
+      <p class="altline" style="margin-top:22px">Want your seal here? Open a PR, sign the CLA — <a style="color:var(--wax-deep)" href="https://github.com/search?q=org%3ASignetry+label%3A%22good+first+issue%22+state%3Aopen&type=issues">start with a good first issue</a>.</p>
     </section>
   </div>
 
