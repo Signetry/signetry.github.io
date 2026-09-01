@@ -1,0 +1,55 @@
+name: versions
+
+# Every version string on index.html is maintained by hand, including the install
+# command a visitor copies. This check fails when one of them no longer matches the
+# repository it describes.
+#
+# The schedule is the part that matters. Drift here is almost never caused by a commit
+# to this repository — it is caused by *another* repository cutting a release, which
+# fires no event here at all. A push-triggered check would sit green for months while
+# the install command went stale. So the weekly run is the real check, and the push and
+# pull_request runs exist to catch a bad hand-edit before it ships.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - tools/check_versions.py
+      - .github/workflows/versions.yml
+  pull_request:
+    paths:
+      - index.html
+      - tools/check_versions.py
+      - .github/workflows/versions.yml
+  schedule:
+    # Mondays, 06:17 UTC. Off the hour on purpose — the top of the hour is when every
+    # scheduled job on GitHub queues at once and starts getting delayed.
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: versions-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # No install step: the checker is stdlib-only by design, so this job cannot break
+      # because of a dependency resolution failure in an unrelated ecosystem.
+      - name: Check the versions printed on index.html
+        env:
+          # Only to lift the unauthenticated rate limit — every repository read is public.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/check_versions.py
